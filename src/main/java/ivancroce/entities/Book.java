@@ -2,10 +2,15 @@ package ivancroce.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "books")
+@NamedQuery(
+        name = "findByAuthor",
+        query = "SELECT b FROM Book b WHERE b.author = :authorValue")
+
 public class Book extends CatalogueItem {
     @Column(nullable = false)
     private String author;

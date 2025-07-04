@@ -7,6 +7,11 @@ import java.util.List;
 @Entity
 @Table(name = "catalogue_items")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(
+        name = "findByYear",
+        query = "SELECT c FROM CatalogueItem c WHERE c.publicationYear = :yearValue"
+)
+
 public abstract class CatalogueItem {
     @Id
     private String isbn;

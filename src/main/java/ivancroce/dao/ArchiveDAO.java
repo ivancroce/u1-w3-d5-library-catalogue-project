@@ -1,14 +1,19 @@
 package ivancroce.dao;
 
+import ivancroce.entities.Book;
 import ivancroce.entities.CatalogueItem;
 import ivancroce.entities.User;
 import ivancroce.exceptions.IsbnNotFoundException;
 import ivancroce.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class ArchiveDAO {
     private final EntityManager em;
+    int yearToFind = 1954;
 
     public ArchiveDAO(EntityManager em) {
         this.em = em;
@@ -58,6 +63,21 @@ public class ArchiveDAO {
             System.out.println(ex.getMessage());
         }
     }
+
+    // findByPublicationYear with NamedQuery
+    public List<CatalogueItem> findByPublicationYear(int year) {
+        TypedQuery<CatalogueItem> query = em.createNamedQuery("findByYear", CatalogueItem.class);
+        query.setParameter("yearValue", year);
+        return query.getResultList();
+    }
+
+    // findByAuthor with NamedQuery
+    public List<Book> findByAuthor(String author) {
+        TypedQuery<Book> query = em.createNamedQuery("findByAuthor", Book.class);
+        query.setParameter("authorValue", author);
+        return query.getResultList();
+    }
+
 }
 
 

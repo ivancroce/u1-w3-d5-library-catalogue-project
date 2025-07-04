@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("library_catalogue_pu");
@@ -62,7 +63,37 @@ public class Application {
         }
 
         // test removeItemByIsbn
-        dao.removeItemByIsbn("974-0-439-02348-4");
+        // dao.removeItemByIsbn("974-0-439-02348-4");
 
+        // test findByPublicationYear
+        int yearToFind = 1954;
+        try {
+            List<CatalogueItem> results = dao.findByPublicationYear(yearToFind);
+
+            if (results.isEmpty()) {
+                System.out.println("No item found for the year " + yearToFind);
+            } else {
+                System.out.println("Found by year: ");
+                results.forEach(item -> System.out.println(item));
+            }
+        } catch (Exception e) {
+            System.out.println("Error while finding the year: " + e.getMessage());
+        }
+
+        // test findByAuthor
+        String authorToFind = "George Orwell";
+        try {
+            List<Book> foundBook = dao.findByAuthor(authorToFind);
+
+            if (foundBook.isEmpty()) {
+                System.out.println("No book found for this author '" + authorToFind + "'");
+            } else {
+                System.out.println("Found by author: ");
+                foundBook.forEach(book -> System.out.println(book));
+            }
+        } catch (Exception e) {
+            System.out.println("Error while finding the author: " + e.getMessage());
+        }
     }
 }
+
