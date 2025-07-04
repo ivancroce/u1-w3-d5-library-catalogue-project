@@ -39,7 +39,7 @@ public class ArchiveDAO {
     public CatalogueItem findByIsbn(String isbn) {
         CatalogueItem item = em.find(CatalogueItem.class, isbn);
         if (item == null) {
-            throw new IsbnNotFoundException("Elemento con ISBN " + isbn);
+            throw new IsbnNotFoundException("Item with ISBN " + isbn);
         }
         return item;
     }

@@ -43,6 +43,6 @@ public class Book extends CatalogueItem {
         return "Book{" +
                 "author='" + author + '\'' +
                 ", genre='" + genre + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }

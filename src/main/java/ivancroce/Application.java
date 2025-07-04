@@ -1,10 +1,7 @@
 package ivancroce;
 
 import ivancroce.dao.ArchiveDAO;
-import ivancroce.entities.Book;
-import ivancroce.entities.Loan;
-import ivancroce.entities.Magazine;
-import ivancroce.entities.User;
+import ivancroce.entities.*;
 import ivancroce.enums.Periodicity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -54,5 +51,8 @@ public class Application {
         // dao.save(loan1);
         // dao.save(loan2);
         // dao.save(loan3);
+
+        CatalogueItem javaMagFromDb = dao.findByIsbn("975-0-439-02348-5");
+        System.out.println(javaMagFromDb);
     }
 }

@@ -31,6 +31,6 @@ public class Magazine extends CatalogueItem {
     public String toString() {
         return "Magazine{" +
                 "periodicity=" + periodicity +
-                '}';
+                "} " + super.toString();
     }
 }
