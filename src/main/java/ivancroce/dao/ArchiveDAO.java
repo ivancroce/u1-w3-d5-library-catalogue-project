@@ -43,6 +43,21 @@ public class ArchiveDAO {
         }
         return item;
     }
+
+    // removeItemByIsbn
+    public void removeItemByIsbn(String isbn) {
+        try {
+            EntityTransaction t = em.getTransaction();
+            CatalogueItem itemToRemove = this.findByIsbn(isbn);
+
+            t.begin();
+            em.remove(itemToRemove);
+            t.commit();
+            System.out.println("Item '" + itemToRemove.getTitle() + "' deleted.");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
 
 

@@ -3,6 +3,7 @@ package ivancroce;
 import ivancroce.dao.ArchiveDAO;
 import ivancroce.entities.*;
 import ivancroce.enums.Periodicity;
+import ivancroce.exceptions.IsbnNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -52,7 +53,16 @@ public class Application {
         // dao.save(loan2);
         // dao.save(loan3);
 
-        CatalogueItem javaMagFromDb = dao.findByIsbn("975-0-439-02348-5");
-        System.out.println(javaMagFromDb);
+        // test findByIsbn
+        try {
+            CatalogueItem javaMagFromDb = dao.findByIsbn("975-0-439-02348-5");
+            System.out.println(javaMagFromDb);
+        } catch (IsbnNotFoundException e) {
+            System.out.println("Can't find this ISBN");
+        }
+
+        // test removeItemByIsbn
+        dao.removeItemByIsbn("974-0-439-02348-4");
+
     }
 }
