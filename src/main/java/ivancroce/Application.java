@@ -94,6 +94,22 @@ public class Application {
         } catch (Exception e) {
             System.out.println("Error while finding the author: " + e.getMessage());
         }
+
+        // test findByTitleContaining
+        String titlePart = "in";
+        try {
+            List<CatalogueItem> foundTitle = dao.findByTitleContaining(titlePart);
+
+            if (foundTitle.isEmpty()) {
+                System.out.println("No item found containing '" + titlePart + "' in title.");
+            } else {
+                System.out.println("Found title containing '" + titlePart + "': ");
+                foundTitle.forEach(catalogueItem -> System.out.println(catalogueItem));
+            }
+        } catch (Exception e) {
+            System.out.println("Error while finding a title: " + e.getMessage());
+        }
+
     }
 }
 

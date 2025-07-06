@@ -78,6 +78,12 @@ public class ArchiveDAO {
         return query.getResultList();
     }
 
+    // findByTitleContaining with TypedQuery
+    public List<CatalogueItem> findByTitleContaining(String titlePart) {
+        TypedQuery<CatalogueItem> query = em.createQuery("Select c FROM CatalogueItem c WHERE LOWER(c.title) LIKE LOWER(:title)", CatalogueItem.class);
+        query.setParameter("title", "%" + titlePart + "%");
+        return query.getResultList();
+    }
 }
 
 
