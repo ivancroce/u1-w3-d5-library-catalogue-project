@@ -125,6 +125,24 @@ public class Application {
             System.out.println("Error while finding a loaned item: " + e.getMessage());
         }
 
+
+        // test findOverdueLoans
+        try {
+            List<Loan> overdueLoans = dao.findOverdueLoans();
+
+            if (overdueLoans.isEmpty()) {
+                System.out.println("No overdue loans found.");
+            } else {
+                System.out.println("Overdue loans found: " + overdueLoans);
+            }
+        } catch (Exception e) {
+            System.out.println("Errore while finding overdue loans: " + e.getMessage());
+        }
+
+        System.out.println("Grazie e arrivederci! 👋");
+
+        em.close();
+        emf.close();
     }
 }
 

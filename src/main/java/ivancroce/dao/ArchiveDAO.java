@@ -2,6 +2,7 @@ package ivancroce.dao;
 
 import ivancroce.entities.Book;
 import ivancroce.entities.CatalogueItem;
+import ivancroce.entities.Loan;
 import ivancroce.entities.User;
 import ivancroce.exceptions.IsbnNotFoundException;
 import ivancroce.exceptions.NotFoundException;
@@ -9,6 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ArchiveDAO {
@@ -89,6 +91,13 @@ public class ArchiveDAO {
     public List<CatalogueItem> findLoanedItemsByUserCardNum(long cardNumber) {
         TypedQuery<CatalogueItem> query = em.createQuery("SELECT l.catalogueItem FROM Loan l WHERE l.user.cardNumber = :cardNumber AND l.actualReturnDate IS NULL", CatalogueItem.class);
         query.setParameter("cardNumber", cardNumber);
+        return query.getResultList();
+    }
+
+    // findOverdueLoans with TypedQuery
+    public List<Loan> findOverdueLoans() {
+        TypedQuery<Loan> query = em.createQuery("SELECT l FROM Loan l WHERE l.expectedReturnDate < :today AND l.actualReturnDate IS NULL", Loan.class);
+        query.setParameter("today", LocalDate.now());
         return query.getResultList();
     }
 }
