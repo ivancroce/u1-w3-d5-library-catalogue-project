@@ -110,6 +110,21 @@ public class Application {
             System.out.println("Error while finding a title: " + e.getMessage());
         }
 
+        // test findLoanedItemsByUserCardNum
+        long cardNumber = 321;
+        try {
+            List<CatalogueItem> foundLoanedItem = dao.findLoanedItemsByUserCardNum(cardNumber);
+
+            if (foundLoanedItem.isEmpty()) {
+                System.out.println("No loaned item found with Card Number '" + cardNumber + "'");
+            } else {
+                System.out.println("Found loaned item associated with Card Number'" + cardNumber + "':");
+                foundLoanedItem.forEach(catalogueItem -> System.out.println(catalogueItem));
+            }
+        } catch (Exception e) {
+            System.out.println("Error while finding a loaned item: " + e.getMessage());
+        }
+
     }
 }
 

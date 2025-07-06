@@ -84,6 +84,13 @@ public class ArchiveDAO {
         query.setParameter("title", "%" + titlePart + "%");
         return query.getResultList();
     }
+
+    // findLoanedItemsByUserCardNum with TypedQuery
+    public List<CatalogueItem> findLoanedItemsByUserCardNum(long cardNumber) {
+        TypedQuery<CatalogueItem> query = em.createQuery("SELECT l.catalogueItem FROM Loan l WHERE l.user.cardNumber = :cardNumber AND l.actualReturnDate IS NULL", CatalogueItem.class);
+        query.setParameter("cardNumber", cardNumber);
+        return query.getResultList();
+    }
 }
 
 
